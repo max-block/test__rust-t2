@@ -16,7 +16,7 @@ pub struct App {
 impl App {
     pub fn new(params: Params) -> Self {
         let first_service = Arc::new(FirstService::new(params.clone()));
-        let second_service = Arc::new(SecondService::new(params));
+        let second_service = Arc::new(SecondService::new(params, first_service.clone()));
         Self {
             first_service,
             second_service,
@@ -26,7 +26,6 @@ impl App {
     pub fn run(&self) {
         self.first_service.f1();
         self.second_service.s1();
-        self.first_service.f2();
         self.second_service.s2()
     }
 }
